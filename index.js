@@ -3,7 +3,6 @@ const decodeMorse = function (morseCode) {
     return morseCode.split(' ').map(e => e === '' ? ' ' : MORSE_CODE[e]).join('').replace(/\s\s/g, ' ').trim()
 }
 const decodeBitsAdvanced = function (bits) {
-    console.log(bits)
     bits = bits.replace(/^0+/g, '').replace(/0+$/g, '')
     if (!bits) {
         return ''
@@ -50,8 +49,8 @@ const decodeBitsAdvanced = function (bits) {
     }
 
     // arbitrarily divide chunks into set of thresholds - for pauses
-    const dotPauseThreshold = 0.22
-    const dashPauseThreshold = 0.64
+    const dotPauseThreshold = 0.23
+    const dashPauseThreshold = 0.59
     const zerosDiff = (distinctZeroLengths[distinctZeroLengths.length - 1] - distinctZeroLengths[0])
     distinctZeroLengths.forEach(e => {
         if (e <= distinctZeroLengths[0] + zerosDiff * dotPauseThreshold) {
@@ -72,7 +71,7 @@ const decodeBitsAdvanced = function (bits) {
     }
 
     // arbitrarily divide chunks into set of thresholds - for ones
-    const dotThreshold = 0.44
+    const dotThreshold = 0.48
     const onesDiff = (distinctOneLengths[distinctOneLengths.length - 1] - distinctOneLengths[0])
     distinctOneLengths.every(e => {
         if (e <= distinctOneLengths[0] + onesDiff * dotThreshold) {
